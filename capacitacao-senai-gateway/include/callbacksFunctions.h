@@ -5,6 +5,11 @@
 #include "api-credentiasl.h"
 #include "network-credentials.h"
 
+int value = 0;
+bool send = false;
+
+
+
 void OnDataReceived(const uint8_t* macAddress, const uint8_t* data, int dataLength) {
   char macAddressString[18];
   snprintf(macAddressString, sizeof(macAddressString),
@@ -15,19 +20,9 @@ void OnDataReceived(const uint8_t* macAddress, const uint8_t* data, int dataLeng
   Serial.println(macAddressString);
   Serial.print("Data: ");
   Serial.println(data[0]);
-  WiFi.begin(SSID, PASS);
-  Serial.print("Connecting");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("Connected");
-  Serial.print("Sending Data...");
-  String stringToSend = "POT=";
-  stringToSend += (String)data[0];
-  sendData(stringToSend);
-  WiFi.disconnect();
-  Serial.println("Data Send");
+  value = data[0];
+  send =  true;
+  // sendData("POT=" + (String)data[0]);
 }
 
 #endif // __CALLBACKSFUNCTIONS_H__

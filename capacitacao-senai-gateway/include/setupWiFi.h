@@ -37,17 +37,18 @@ void peerToClients(){
 }
 
 void setupWiFi(){
-  WiFi.mode(WIFI_STA);
-  // WiFi.begin(SSID, PASS);
-  // Serial.print("Connecting");
-  // while (WiFi.status() != WL_CONNECTED) {
-  //   delay(500);
-  //   Serial.print(".");
-  // }
-  // Serial.println("Connected");
+  WiFi.disconnect(true, true);
+  WiFi.mode(WIFI_AP_STA);
+  WiFi.begin(SSID, PASS);
+  Serial.print("Connecting");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("Connected");
   Serial.print("Channel: ");
   Serial.println(WiFi.channel());
-  Serial.println(WiFi.macAddress());
+  Serial.println(WiFi.softAPmacAddress());
   initEspNow();
   // peerToClients();
   esp_now_register_recv_cb(OnDataReceived);

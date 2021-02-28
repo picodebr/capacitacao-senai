@@ -2,9 +2,15 @@
 #define __APICREDENTIASL_H__
 #include <Arduino.h>
 #include <HTTPClient.h>
+// #include <WiFiClientSecure.h>
+
+// WiFiClientSecure client;
 
 // #define apiBody "https://sheets.googleapis.com/v4/spreadsheets/"
 // #define spreadsheetsId "1YmKWFNZETL-sobB_1jpem_VAooBECJ2_Ki-kF74f-7c"
+
+  // HTTPClient http;
+
 
 String GOOGLE_SCRIPT_ID =
     "AKfycbxwbiRZJ14wImkrFMT4vwTyi3tmBWgElKPlNyeyzXRd3lsVyLNOdKPT";

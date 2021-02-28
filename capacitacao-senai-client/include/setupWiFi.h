@@ -7,6 +7,7 @@
 #include "esp_now.h"
 #include "pins.h"
 #include "setupOled.h"
+#include "network-credentials.h"
 
 #define gatewaychannel 11
 
@@ -26,14 +27,18 @@ void initEspNow() {
 }
 
 void peerToGateway() {
-  gateway.channel = gatewaychannel;
+  gateway.channel = WiFi.channel();
   gateway.encrypt = 0;
+  gateway.ifidx = WIFI_IF_AP;
   memcpy(gateway.peer_addr, gatewayMacAddress[0], sizeof(gatewayMacAddress[0]));
   esp_now_add_peer(&gateway);
 }
 
 void setupWiFi() {
-  WiFi.mode(WIFI_STA);
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP("client", "12345678", 11, true);
+  Serial.print("Channel: ");
+  Serial.println(WiFi.channel());
   display.println("MAC:");
   display.println(WiFi.macAddress());
   initEspNow();
