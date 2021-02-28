@@ -1,7 +1,11 @@
 #include <Arduino.h>
 
+#include "setupWiFi.h"
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  Serial.println("Init Serial");
+  setupWiFi();
 }
 
 void loop() {
