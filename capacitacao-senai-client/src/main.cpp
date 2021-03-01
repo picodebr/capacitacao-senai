@@ -1,9 +1,20 @@
 #include <Arduino.h>
 
+#include "pins.h"
+#include "setupOled.h"
+#include "setupWiFi.h"
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  setupPins();
+  setupOled();
+  setupWiFi();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  if (digitalRead(interruptPin)) {
+    sendMessage();
+    while (digitalRead(interruptPin))
+      ;
+  }
 }

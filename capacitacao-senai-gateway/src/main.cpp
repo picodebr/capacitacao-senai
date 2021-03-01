@@ -1,9 +1,20 @@
 #include <Arduino.h>
 
+#include "setupWiFi.h"
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  Serial.println("Init Serial");
+  setupWiFi();
+  sendData("POT=201");
 }
 
+// bool send = false;
+// int value = 0;
+
 void loop() {
-  // put your main code here, to run repeatedly:
+  if(send) {
+    send = false;
+    sendData("POT=" + (String)value);
+  }
 }
